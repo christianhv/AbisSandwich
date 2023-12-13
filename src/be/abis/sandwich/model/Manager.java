@@ -2,9 +2,12 @@ package be.abis.sandwich.model;
 
 public class Manager implements Role{
 
+    public Manager() {
+    }
+
     @Override
     public String getType() {
-        return null;
+        return "Manager";
     }
 
     @Override

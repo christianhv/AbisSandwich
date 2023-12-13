@@ -3,7 +3,7 @@ package be.abis.sandwich.model;
 public class Instructor implements Role{
     @Override
     public String getType() {
-        return "instructor";
+        return "Instructor";
     }
 
     @Override
