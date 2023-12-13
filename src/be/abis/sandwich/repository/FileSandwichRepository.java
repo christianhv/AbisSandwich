@@ -34,9 +34,27 @@ public class FileSandwichRepository implements SandwichRepository{
     }
 
     @Override
-    public Sandwich findSanwichbyName(Sandwich sandwich) {
+    public Sandwich findSandwichByName(String name) {
+        Sandwich s = (Sandwich) sandwiches
+                .stream()
+                .filter(sandwich -> sandwich.getName().equals(name))
+                .toList();
+
         return null;
     }
+
+    @Override
+    public Sandwich findSandwichByNameandType(String name, SandwichType type) {
+        Sandwich sandwich = sandwiches
+                .stream()
+                .filter(sandwich1 -> sandwich1.getName().equals(name))
+                .filter(sandwich1 -> sandwich1.getSandwichType().equals(type))
+                .findFirst()
+                .stream().toList().get(0);
+
+        return sandwich;
+    }
+
 
     private Sandwich parseSandwiches(String s){
         String[] cells = s.split(";");
