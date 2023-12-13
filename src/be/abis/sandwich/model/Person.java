@@ -3,8 +3,8 @@ package be.abis.sandwich.model;
 public class Person {
     String firstName;
     String LastName;
-    String Company;
-
+    String company;
+    String mail;
     int age;
 
 
@@ -12,7 +12,8 @@ public class Person {
     public Person(String firstName, String lastName, String company) {
         this.firstName = firstName;
         LastName = lastName;
-        Company = company;
+        company = company;
+        
     }
 
     public String getFirstName() {
@@ -24,7 +25,7 @@ public class Person {
     }
 
     public String getCompany() {
-        return Company;
+        return company;
     }
 
     public void setFirstName(String firstName) {
@@ -36,7 +37,7 @@ public class Person {
     }
 
     public void setCompany(String company) {
-        Company = company;
+        company = company;
     }
     public int getAge() {
         return age;
@@ -46,4 +47,11 @@ public class Person {
         this.age = age;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }

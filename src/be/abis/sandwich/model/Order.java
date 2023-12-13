@@ -31,7 +31,16 @@ public class Order {
 
     public void addPersonalOrder(PersonalOrder pOrder){
         //we need to check if person already exist twice
-        this.listOfPersonalOrders.add(pOrder);
+        long inList = this.listOfPersonalOrders
+                .stream()
+                .filter(personalOrder -> personalOrder.getOrderOwner().getMail().equals(pOrder.getOrderOwner().getMail())).count();
+
+        if (inList<2) {
+            this.listOfPersonalOrders.add(pOrder);
+        }
+        else{
+            System.out.println("Throw exception here, you can't order more than 2 sandwiches");
+        }
     }
 
     public Double calculateTotalPrice(){
