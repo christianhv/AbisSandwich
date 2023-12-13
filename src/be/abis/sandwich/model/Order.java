@@ -1,5 +1,8 @@
 package be.abis.sandwich.model;
 
+import be.abis.sandwich.exception.PersonNotFoundException;
+import be.abis.sandwich.exception.PersonalOrderNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -29,7 +32,7 @@ public class Order {
         this.date = date;
     }
 
-    public void addPersonalOrder(PersonalOrder pOrder){
+    public void addPersonalOrder(PersonalOrder pOrder) throws PersonalOrderNotFoundException {
         //we need to check if person already exist twice
         long inList = this.listOfPersonalOrders
                 .stream()
@@ -39,7 +42,7 @@ public class Order {
             this.listOfPersonalOrders.add(pOrder);
         }
         else{
-            System.out.println("Throw exception here, you can't order more than 2 sandwiches");
+            throw new PersonalOrderNotFoundException(" No personal order found in the list ");
         }
     }
 

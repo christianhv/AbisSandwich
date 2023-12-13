@@ -9,6 +9,6 @@ public interface PersonRepository {
 
     List<Person> findAllPersons();
     //Person findPersonById(int id) throws PersonNotFoundException;
-    Person findPersonByEmail(String email, String password) throws PersonNotFoundException;
+    String findPersonByEmail(String email) throws PersonNotFoundException;
     void addPerson(Person p);
 }
