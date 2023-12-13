@@ -2,17 +2,22 @@ package be.abis.sandwich.model;
 
 import be.abis.sandwich.theenums.SandwichType;
 
-import javax.xml.namespace.QName;
-
 public class Sandwich {
     String name;
-    SandwichType sndwchType;
+    SandwichType sandwichType;
     Double pricePerUnit;
     String description;
 
-    public Sandwich(String name, SandwichType sndwchType) {
+    public Sandwich(String name, SandwichType sandwichType) {
         this.name = name;
-        this.sndwchType = sndwchType;
+        this.sandwichType = sandwichType;
+    }
+
+    public Sandwich(String name, SandwichType sandwichType, Double pricePerUnit, String description) {
+        this.name = name;
+        this.sandwichType = sandwichType;
+        this.pricePerUnit = pricePerUnit;
+        this.description = description;
     }
 
     public String getName() {
@@ -23,12 +28,12 @@ public class Sandwich {
         this.name = name;
     }
 
-    public SandwichType getSndwchType() {
-        return sndwchType;
+    public SandwichType getSandwichType() {
+        return sandwichType;
     }
 
-    public void setSndwchType(SandwichType sndwchType) {
-        this.sndwchType = sndwchType;
+    public void setSandwichType(SandwichType sandwichType) {
+        this.sandwichType = sandwichType;
     }
 
     public Double getPricePerUnit() {
@@ -45,5 +50,15 @@ public class Sandwich {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Sandwich{" +
+                "name='" + name + '\'' +
+                ", sandwichType=" + sandwichType +
+                ", pricePerUnit=" + pricePerUnit +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
