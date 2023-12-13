@@ -5,6 +5,10 @@ public class Person {
     String LastName;
     String Company;
 
+    int age;
+
+
+
     public Person(String firstName, String lastName, String company) {
         this.firstName = firstName;
         LastName = lastName;
@@ -34,4 +38,12 @@ public class Person {
     public void setCompany(String company) {
         Company = company;
     }
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 }
