@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface SandwichRepository {
-    void removeSandwich(Sandwich sandwich);
+    void removeSandwich(Sandwich sandwich) throws IOException;
      void addSandwich(Sandwich sandwich, Person p) throws PersonNotFoundException, RoleModificationException;
 
     String formatSandwich(Sandwich sandwich);

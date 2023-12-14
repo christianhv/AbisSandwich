@@ -33,7 +33,7 @@ public class FileSandwichRepository implements SandwichRepository{
                 .stream().collect(toCollection(ArrayList::new));
     }
     @Override
-    public void removeSandwich(Sandwich sandwich) {
+    public void removeSandwich(Sandwich sandwich) throws IOException {
         //Sandwich s = this.findSandwichByNameandType(sandwich.getName(), sandwich.getSandwichType());
         this.sandwiches.removeIf(s-> s.getName().equals(sandwich.getName()));
 
@@ -49,6 +49,8 @@ public class FileSandwichRepository implements SandwichRepository{
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
+        //this.switchFiles();
 
     }
     @Override
@@ -141,8 +143,7 @@ public class FileSandwichRepository implements SandwichRepository{
         String backpfile = this.filePath + "_" + formattedDateTime;
         Path oldFile = Paths.get(this.filePath);
         Files.move(oldFile, oldFile.resolveSibling(backpfile));
-        oldFile = Paths
-
-
+        oldFile = Paths.get(this.filePathRem);
+        Files.move(oldFile, oldFile.resolveSibling(this.filePath));
     }
 }
