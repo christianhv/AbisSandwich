@@ -15,18 +15,36 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
+import static java.util.stream.Collectors.toCollection;
+
 public class FileSandwichRepository implements SandwichRepository{
     private List<Sandwich> sandwiches = new ArrayList<Sandwich>();
     private Person person;
     //private String filePath = "/Users/Duser/IdeaProjects/AbisSandwich/src/be/abis/sandwich/util/sandwiches.csv";
     private String filePath = "src/be/abis/sandwich/util/sandwiches.csv";
+    private String filePathRem = "src/be/abis/sandwich/util/sandwiches_withRemoved.csv";
     public FileSandwichRepository()  throws IOException {
-       sandwiches = Files.lines(Paths.get(this.filePath))
-                .map(line->this.parseSandwiches(line)).toList();
+        this.sandwiches = Files.lines(Paths.get(this.filePath))
+                .map(line->this.parseSandwiches(line)).toList()
+                .stream().collect(toCollection(ArrayList::new));
     }
     @Override
     public void removeSandwich(Sandwich sandwich) {
-        Sandwich s = this.findSandwichByNameandType(sandwich.getName(), sandwich.getSandwichType());
+        //Sandwich s = this.findSandwichByNameandType(sandwich.getName(), sandwich.getSandwichType());
+        this.sandwiches.removeIf(s-> s.getName().equals(sandwich.getName()));
+
+        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(filePathRem), Charset.forName("UTF-8"), StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            //bw.write(this.formatSandwich(sandwich)+"\n");
+            this.sandwiches.forEach(sandwich1 -> {
+                try {
+                    bw.write(this.formatSandwich(sandwich1));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
     @Override

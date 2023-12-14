@@ -23,12 +23,18 @@ public class TestCreateOrders {
 
         SandwichRepository sr = new FileSandwichRepository();
         List<Sandwich> ss = sr.findAllSandwiches();
+        System.out.println("COMPLETE");
         ss.forEach(System.out::println);
+        System.out.println("\n\n\n");
 
         Sandwich s = sr.findSandwichByNameandType("BRIE", SandwichType.CHEESE);
 
         System.out.println("found sandwich is:" + s);
 
+        sr.removeSandwich(ss.get(0));
+        System.out.println("REMOVED++++++");
+        sr.findAllSandwiches().forEach(System.out::println);
+        /*
         PersonRepository pr = new MemoryPersonRepository();
         List<Person> allPersons = pr.findAllPersons();
 
@@ -51,6 +57,12 @@ public class TestCreateOrders {
         order.addPersonalOrder(Ord1);
         order.addPersonalOrder(Ord2);
         order.addPersonalOrder(Ord3);
+
+         */
+
+
+
+
 //        System.out.println("  -----   ");
 //
 //               Person per = (Person) pp
