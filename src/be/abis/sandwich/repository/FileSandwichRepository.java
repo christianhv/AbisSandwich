@@ -11,13 +11,17 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static java.util.stream.Collectors.toCollection;
 
 public class FileSandwichRepository implements SandwichRepository{
+    final static DateTimeFormatter ISO_FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
     private List<Sandwich> sandwiches = new ArrayList<Sandwich>();
     private Person person;
     //private String filePath = "/Users/Duser/IdeaProjects/AbisSandwich/src/be/abis/sandwich/util/sandwiches.csv";
@@ -50,10 +54,11 @@ public class FileSandwichRepository implements SandwichRepository{
     @Override
     public void addSandwich(Sandwich sandwich, Person p) throws PersonNotFoundException, RoleModificationException {
 
-        if(p.hasRole("OrderResponsible")){
-
+        if(p.hasRole("Order Responsible")){
+            sandwiches.add(sandwich);
             try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(filePath), Charset.forName("UTF-8"), StandardOpenOption.APPEND)) {
-                bw.write(this.formatSandwich(sandwich)+"\n");
+                bw.write("\n");
+                bw.write(this.formatSandwich(sandwich));
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());
@@ -61,7 +66,7 @@ public class FileSandwichRepository implements SandwichRepository{
 
         }else {
 
-            throw new RoleModificationException(" No personal order found in the list ");
+            throw new RoleModificationException("You can't add Sandwiches");
         }
 
     }
@@ -72,7 +77,7 @@ public class FileSandwichRepository implements SandwichRepository{
         sb.append(sandwich.getSandwichType()).append(";")
                 .append(sandwich.getName()).append(";")
                 .append(sandwich.getPricePerUnit()).append(";")
-                .append(sandwich.getDescription());
+                .append(sandwich.getDescription()).append("\n");
         return sb.toString();
     }
 
@@ -128,5 +133,16 @@ public class FileSandwichRepository implements SandwichRepository{
         String description = cells[3];
         Sandwich sandwich = new Sandwich(type,name, price, description);
         return sandwich;
+    }
+
+    private void switchFiles() throws IOException {
+        LocalDateTime ldt = LocalDateTime.now();
+        String formattedDateTime = ldt.format(ISO_FORMATTER);
+        String backpfile = this.filePath + "_" + formattedDateTime;
+        Path oldFile = Paths.get(this.filePath);
+        Files.move(oldFile, oldFile.resolveSibling(backpfile));
+        oldFile = Paths
+
+
     }
 }

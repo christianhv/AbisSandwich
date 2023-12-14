@@ -2,6 +2,7 @@ package be.abis.sandwich.test;
 
 import be.abis.sandwich.exception.PersonNotFoundException;
 import be.abis.sandwich.exception.PersonalOrderNotFoundException;
+import be.abis.sandwich.exception.RoleModificationException;
 import be.abis.sandwich.model.*;
 import be.abis.sandwich.repository.FileSandwichRepository;
 import be.abis.sandwich.repository.MemoryPersonRepository;
@@ -19,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TestCreateOrders {
-    public static void main(String[] args) throws IOException, PersonalOrderNotFoundException {
+    public static void main(String[] args) throws IOException, PersonalOrderNotFoundException, PersonNotFoundException, RoleModificationException {
 
         SandwichRepository sr = new FileSandwichRepository();
         List<Sandwich> ss = sr.findAllSandwiches();
@@ -30,10 +31,17 @@ public class TestCreateOrders {
         Sandwich s = sr.findSandwichByNameandType("BRIE", SandwichType.CHEESE);
 
         System.out.println("found sandwich is:" + s);
-
-        sr.removeSandwich(ss.get(0));
+        Sandwich toRemandAdd = ss.get(0);
+        sr.removeSandwich(toRemandAdd);
         System.out.println("REMOVED++++++");
         sr.findAllSandwiches().forEach(System.out::println);
+
+        Person inst3 = new Person("Emely", "Dubois","gindesteege@abis.be",new OrderResponsible());
+        sr.addSandwich(toRemandAdd, inst3);
+        System.out.println("\n ++++ AFTER ADDING");
+        sr.findAllSandwiches().forEach(System.out::println);
+
+
         /*
         PersonRepository pr = new MemoryPersonRepository();
         List<Person> allPersons = pr.findAllPersons();
