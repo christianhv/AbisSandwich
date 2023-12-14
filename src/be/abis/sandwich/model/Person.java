@@ -1,27 +1,40 @@
 package be.abis.sandwich.model;
 
+import be.abis.sandwich.exception.PersonNotFoundException;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
-    String firstName;
-    String LastName;
-    String company;
-    String mail;
-    int age;
+    private String firstName;
+    private String lastName;
+    private String company;
+    private  String mail;
+    private int age;
+    private List<Role> roles = new ArrayList<Role>();
 
-
-
-    public Person(String firstName, String lastName, String company) {
+    public Person(String firstName, String lastName, String mail, Role... roles) {
         this.firstName = firstName;
-        LastName = lastName;
-        company = company;
+        this.lastName = lastName;
+        this.mail = mail;
+        this.addRole(roles);
+    }
+
+    public Person(String firstName, String lastName, String mail) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mail = mail;
         
     }
+
+
 
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public String getCompany() {
@@ -33,7 +46,7 @@ public class Person {
     }
 
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 
     public void setCompany(String company) {
@@ -53,5 +66,29 @@ public class Person {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public Boolean hasRole(String r) throws PersonNotFoundException {
+        Role rol = roles.stream()
+                .filter(role -> role.getType().equals(r)).findFirst()
+                .orElseThrow(() -> new PersonNotFoundException("Rol not found"));
+        return rol!=null ? true:false;
+    }
+    public Role findRole(String rol){
+        Role r = null;
+        r = roles.stream()
+                .filter(role -> role.getType().equals(rol))
+                .findFirst().get();
+
+        return r;
+    }
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void addRole(Role... roles){
+        for (Role r: roles         ) {
+            this.roles.add(r);
+        }
     }
 }

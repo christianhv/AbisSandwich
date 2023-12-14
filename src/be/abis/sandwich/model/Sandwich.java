@@ -13,7 +13,7 @@ public class Sandwich {
         this.sandwichType = sandwichType;
     }
 
-    public Sandwich(String name, SandwichType sandwichType, Double pricePerUnit, String description) {
+    public Sandwich( SandwichType sandwichType,String name, Double pricePerUnit, String description) {
         this.name = name;
         this.sandwichType = sandwichType;
         this.pricePerUnit = pricePerUnit;
