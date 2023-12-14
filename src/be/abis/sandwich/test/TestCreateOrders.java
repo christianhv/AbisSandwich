@@ -1,14 +1,13 @@
 package be.abis.sandwich.test;
 
 import be.abis.sandwich.exception.PersonNotFoundException;
-import be.abis.sandwich.model.Order;
-import be.abis.sandwich.model.Person;
-import be.abis.sandwich.model.Sandwich;
-import be.abis.sandwich.model.Session;
+import be.abis.sandwich.exception.PersonalOrderNotFoundException;
+import be.abis.sandwich.model.*;
 import be.abis.sandwich.repository.FileSandwichRepository;
 import be.abis.sandwich.repository.MemoryPersonRepository;
 import be.abis.sandwich.repository.PersonRepository;
 import be.abis.sandwich.repository.SandwichRepository;
+import be.abis.sandwich.theenums.BreadType;
 import be.abis.sandwich.theenums.Course;
 import be.abis.sandwich.theenums.SandwichType;
 
@@ -20,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TestCreateOrders {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, PersonalOrderNotFoundException {
 
         SandwichRepository sr = new FileSandwichRepository();
         List<Sandwich> ss = sr.findAllSandwiches();
@@ -31,21 +30,27 @@ public class TestCreateOrders {
         System.out.println("found sandwich is:" + s);
 
         PersonRepository pr = new MemoryPersonRepository();
-        List<Person> allUsers = pr.findAllPersons();
+        List<Person> allPersons = pr.findAllPersons();
 
             sr.printMenu();
 
             List<Person> pp = pr.findAllPersons();
             pp.forEach(System.out::println);
 
-        for (Person person : pp) {
-            try {
-            person.hasRole("OrderResponsible");
-            } catch (PersonNotFoundException e) {
-                throw new RuntimeException(e);
+        for (Person person: pp) {
+            if (person.hasRole("Order Responsible")){
+                System.out.println("Name: " + person.getFirstName() + " has Order Responsible rol");
             }
         }
+        Session session = new Session(LocalDateTime.now(), Course.JAVA_ADV);
+        Order order = new Order(session);
+        PersonalOrder Ord1 = new PersonalOrder(ss.get(0),Boolean.FALSE, BreadType.GRAY,allPersons.get(0));
+        PersonalOrder Ord2 = new PersonalOrder(ss.get(0),Boolean.TRUE, BreadType.WHITE,allPersons.get(0));
+        PersonalOrder Ord3 = new PersonalOrder(ss.get(0),Boolean.FALSE, BreadType.GRAY,allPersons.get(0));
 
+        order.addPersonalOrder(Ord1);
+        order.addPersonalOrder(Ord2);
+        order.addPersonalOrder(Ord3);
 //        System.out.println("  -----   ");
 //
 //               Person per = (Person) pp

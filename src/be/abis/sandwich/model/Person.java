@@ -4,13 +4,13 @@ import be.abis.sandwich.exception.PersonNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Person {
     private String firstName;
     private String lastName;
     private String company;
     private  String mail;
-    private int age;
     private List<Role> roles = new ArrayList<Role>();
 
     public Person(String firstName, String lastName, String mail, Role... roles) {
@@ -52,13 +52,6 @@ public class Person {
     public void setCompany(String company) {
         company = company;
     }
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public String getMail() {
         return mail;
@@ -68,10 +61,12 @@ public class Person {
         this.mail = mail;
     }
 
-    public Boolean hasRole(String r) throws PersonNotFoundException {
-        Role rol = roles.stream()
+    public Boolean hasRole(String r) {
+        Role rol = null;
+        rol = roles.stream()
                 .filter(role -> role.getType().equals(r)).findFirst()
-                .orElseThrow(() -> new PersonNotFoundException("Rol not found"));
+                .orElse(null);
+                //.orElseThrow(() -> new PersonNotFoundException("Rol not found"));
         return rol!=null ? true:false;
     }
     public Role findRole(String rol){
@@ -90,5 +85,15 @@ public class Person {
         for (Role r: roles         ) {
             this.roles.add(r);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", company='" + company + '\'' +
+                ", mail='" + mail + '\'' +
+                '}';
     }
 }

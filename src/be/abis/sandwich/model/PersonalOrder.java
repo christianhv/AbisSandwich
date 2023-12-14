@@ -8,7 +8,11 @@ public class PersonalOrder {
     BreadType bread;
     Person orderOwner;
 
-    public PersonalOrder() {
+    public PersonalOrder(Sandwich sandwich, Boolean vegetables, BreadType bread, Person orderOwner) {
+        this.sandwich = sandwich;
+        this.vegetables = vegetables;
+        this.bread = bread;
+        this.orderOwner = orderOwner;
     }
 
     public Sandwich getSandwich() {

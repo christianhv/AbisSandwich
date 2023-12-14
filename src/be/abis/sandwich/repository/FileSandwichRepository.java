@@ -26,6 +26,7 @@ public class FileSandwichRepository implements SandwichRepository{
     }
     @Override
     public void removeSandwich(Sandwich sandwich) {
+        Sandwich s = this.findSandwichByNameandType(sandwich.getName(), sandwich.getSandwichType());
 
     }
     @Override

@@ -40,9 +40,10 @@ public class Order {
 
         if (inList<2) {
             this.listOfPersonalOrders.add(pOrder);
+            System.out.println("Order added!");
         }
         else{
-            throw new PersonalOrderNotFoundException(" No personal order found in the list ");
+            throw new PersonalOrderNotFoundException("2 orders Already added!");
         }
     }
 
