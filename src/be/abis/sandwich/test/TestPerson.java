@@ -15,6 +15,8 @@ public class TestPerson {
 
         List<Person> ps = pr.findAllPersons();
 
+        ps.forEach(System.out::println);
+
         ps.get(0).addRole(new Manager());
 
         Role r = ps.get(0).findRole("Manager");

@@ -31,7 +31,7 @@ public class TestCreateOrders {
         PersonRepository pr = new MemoryPersonRepository();
         List<Person> allUsers = pr.findAllPersons();
         LocalDateTime now = LocalDateTime.now();
-        Session sse = new Session(new now, Course.JAVA_ADV);
+        Session sse = new Session( now, Course.JAVA_ADV);
 
         Order ord = new Order(sse);
 
