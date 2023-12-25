@@ -16,4 +16,30 @@ public class Session {
         sessionNo = counter++;
     }
 
+    public Session(Course course) {
+        this.course = course;
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    @Override
+    public String toString() {
+        return "Session{" +
+                "course=" + course +
+                '}';
+    }
 }

@@ -18,54 +18,33 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestCreateOrders {
     public static void main(String[] args) throws IOException {
 
         SandwichRepository sr = new FileSandwichRepository();
-        List<Sandwich> ss = sr.findAllSandwiches();
-        ss.forEach(System.out::println);
+        //List<Sandwich> ss = sr.findAllSandwiches();
+
 
         Sandwich s = sr.findSandwichByNameandType("BRIE", SandwichType.CHEESE);
 
-        System.out.println("found sandwich is:" + s);
+        System.out.println("\nfound sandwich is:" + s);
 
         PersonRepository pr = new MemoryPersonRepository();
         List<Person> allUsers = pr.findAllPersons();
 
-            sr.printMenu();
+        sr.printMenu();
 
-            List<Person> pp = pr.findAllPersons();
-            pp.forEach(System.out::println);
+        List<Person> pp = pr.findAllPersons();
 
-        for (Person person : pp) {
-            try {
-            person.hasRole("OrderResponsible");
-            } catch (PersonNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        System.out.println("  -----   ");
 
-//        System.out.println("  -----   ");
-//
-//               Person per = (Person) pp
-//              .stream()
-//              .filter(person -> person.getMail().equals("gindesteege@abis.be"))
-//              .findFirst()
-//              .stream().toList();
-//
-//        System.out.println("  -----   " + per);
-
-//        try {
-//            per.hasRole("PersonalOrder");
-//        } catch (PersonNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        LocalDateTime now = LocalDateTime.now();
-//        Session sse = new Session(now, Course.JAVA_ADV);
-
-//        Order ord = new Order(sse);
-
+               pp
+              .stream()
+              .filter(person -> person.getMail().equals("gindesteege@abis.be"))
+              .findFirst().ifPresent(System.out::println);
 
 
     }

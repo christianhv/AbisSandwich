@@ -25,7 +25,7 @@ public class TestPerson {
         Role r = ps.get(0).findRole("Manager");
 
         System.out.println(r.getType());
-        System.out.println(ps.get(0).hasRole("Manager"));
+        System.out.println(ps.get(9).hasRole("Manager"));
 
 
 

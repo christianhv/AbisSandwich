@@ -1,0 +1,7 @@
+CHEESE;BRIE DELUXE;5.5;Broodje met brie, sla, walnut en honing;sschillebeeckx@abis.be
+MEAT;HAM;3.95;Broodje met ham en boter;bob.miles@ibm.com
+CHEESE;GEZOND HAM;4.95;GEZOND HAM;jefke@yahoo.com
+FISH;TONIJNTINO;9.6;Broodje met tonijnsalade, martinosaus, augurk en rauwe uitjes;Sara@gmail.be
+CHICKEN;SMOSKE KIP HAWAII;7.2;Broodje met gerafelde kip, ananas, sla, tomaat, ei en cocktailsaus;Sanny@gmail.be
+CHICKEN;SMOSKE KIP HAWAII;7.2;Broodje met gerafelde kip, ananas, sla, tomaat, ei en cocktailsaus;Karine@gmail.be
+CHICKEN;SMOSKE KIP HAWAII;7.2;Broodje met gerafelde kip, ananas, sla, tomaat, ei en cocktailsaus;Karine@gmail.be

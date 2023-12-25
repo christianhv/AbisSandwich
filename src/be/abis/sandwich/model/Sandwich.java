@@ -8,6 +8,7 @@ public class Sandwich {
     Double pricePerUnit;
     String description;
 
+
     public Sandwich(String name, SandwichType sandwichType) {
         this.name = name;
         this.sandwichType = sandwichType;
@@ -19,6 +20,8 @@ public class Sandwich {
         this.pricePerUnit = pricePerUnit;
         this.description = description;
     }
+
+
 
     public String getName() {
         return name;

@@ -11,23 +11,34 @@ public class Person {
     private String company;
     private  String mail;
     private int age;
+
+    Session session;
     private List<Role> roles = new ArrayList<Role>();
 
-    public Person(String firstName, String lastName, String mail, Role... roles) {
+    public Person(String firstName, String lastName, String mail,Session session, Role... roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
         this.addRole(roles);
+        this.session=session;
     }
 
-    public Person(String firstName, String lastName, String mail) {
+    public Person(String firstName, String lastName, String mail,Session session) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mail = mail;
+        this.session=session;
         
     }
 
 
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -90,5 +101,15 @@ public class Person {
         for (Role r: roles         ) {
             this.roles.add(r);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", mail='" + mail + '\'' +
+                ", session=" + session +
+                '}';
     }
 }
